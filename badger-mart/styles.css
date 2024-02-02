@@ -20,11 +20,27 @@ table, th, td {
   inline-size: 500px; 
 }
 
-/* TODO: Add your primary and secondary styling below! */
 .primary-button {
+  background-color: red;
+  color: white;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  border-color: red;
+}
 
+.primary-button:hover {
+  background-color: green;
+  border-color: green;
 }
 
 .secondary-button {
-  
+  background-color: gray;
+  color: white;
+  font-weight: 200;
+  border-radius: 0.5rem;
+  border-color: black;
+}
+
+.secondary-button:hover {
+  background-color: darkslategray;
 }

@@ -59,15 +59,31 @@ function roundMoney(num) {
 }
 
 function calculateSubtotal() {
-	return 0.00; // TODO calculateSubtotal
+	let subtotal = 0;
+	for (let item of ITEMS) {
+		// get quantity
+		let quantity = parseInt(document.getElementById(item + "-quantity").value);
+		// get price
+		let price = parseFloat(document.getElementById(item + "-price").innerText);
+		// multiply by rounded value
+		let item_subtotal = roundMoney(price * quantity);
+		// add to subtotal
+		subtotal += item_subtotal;
+	}
+	return subtotal;
 }
 
 function calculateSalesTax() {
-	return 0.00; // TODO calculateSalesTax
+	// calculate subtotal, state, and taxRate by calling existing functions
+	const subtotal = calculateSubtotal();
+	const state = document.getElementById("state-tax").value;
+	const taxRate = getSalesTaxRateForState(state);
+	// note: seems inefficient to do this; would prefer to store as globals... but would need to update on use anyway.
+	return roundMoney(subtotal * taxRate); // return rounded product of rate * subtotal
 }
 
 function getSalesTaxRateForState(state) {
-	return 0.00; // TODO getSalesTaxRateForState
+	return SALES_TAX[state];
 }
 
 document.getElementById("btn-what-is-my-sales-tax").addEventListener("click", () => {
@@ -84,3 +100,6 @@ document.getElementById("btn-sales-tax").addEventListener("click", () => {
 });
 
 // TODO Add an event listener to btn-checkout
+document.getElementById("btn-checkout").addEventListener("click", () => {
+	alert("Your total is: $" + (calculateSubtotal() + calculateSalesTax()).toFixed(2));
+});
